@@ -6,9 +6,6 @@ import {locationService} from '../../../services/location.service'
 import {homestayService} from '../../../services/homestay.service'
 import { ToastContainer, toast } from 'react-toastify';
 
-// import {customToast} from '../../../helpers/custom-toast'
-// import {customToast} from '../../../helpers/custom-toast'
-
 const CreateHsCommonInfo = () => {
     const history = useHistory();
 
