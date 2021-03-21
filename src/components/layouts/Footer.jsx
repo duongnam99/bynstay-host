@@ -9,7 +9,7 @@ return (
     <div class="simple-footer py-4 mt-5">
         <div class="container">
             <p><a href="/"><img
-                        src="./assets/images/logo-byn.png" /></a>
+                        src="/assets/images/logo-byn.png" /></a>
             </p>
             <div class="row">
                 <div class="col-12 col-sm-5">

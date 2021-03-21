@@ -41,7 +41,6 @@ function register(user) {
     formData.append('c_password', user.re_pass);
     formData.append('user_type', 1);
 
-    console.log(formData);
     return Axios.post(process.env.REACT_APP_BASE_API_URL + 'api/register', formData, config)
         .then(user => {
             localStorage.setItem('user', JSON.stringify(user.data.user));
