@@ -90,6 +90,7 @@ const CreateHsCommonInfo = () => {
 
     return (
         <div className="creatHsCommon">
+            <h4>Cài đặt thông tin chung</h4>
             <div className="input-address">
             <div className="position-relative">
                 <div className="box">

@@ -34,8 +34,12 @@ const CreateHsUtility = () => {
         }
 
         homestayService.storeUtility(data).then((response) => {
-            toast.success("Lưu thành công");
-            setValidateError(false);
+            if (response.data.status === false) {
+                toast.warning(response.data.message);
+            } else {
+                toast.success("Lưu thành công");
+                setValidateError(false);
+            }
 
             homestayService.getHsUtil(1).then((response) => {
                 setUtil(response.data)
@@ -64,6 +68,7 @@ const CreateHsUtility = () => {
 
     return (
         <div className="creatHsUtility">
+            <h4>Cài đặt tiện ích</h4>
             <div className="position-relative">
                 <div className="box">
                     <label htmlFor="" className="d-block">Loại tiện tích</label>
@@ -78,10 +83,14 @@ const CreateHsUtility = () => {
                     </select>
                     <span className={"validator_error " + (isValidateError && validatorMes.utility_id ? 'visible' : 'invisible')}>*{validatorMes.utility_id}</span>
                 </div>
-
             </div>
-            {util.map((item,i) => <span>{item.utility_id}</span>)}
             <button onClick={postData} className="addHomestay mt-3">Thêm</button>
+
+            {/* {util.map((item,i) => <span className="d-block">{item.i}</span> )} */}
+            {Object.keys(util).map((i,ind) => <div className="mt-3">
+                <h5 className="util_line">{i}</h5>
+                {util[i].map((item, i) => <span className="d-block">- {item.name}</span>)}
+            </div> )}
 
         </div>
     );

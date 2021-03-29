@@ -5,6 +5,7 @@ import { stringify } from "querystring";
 
 import Create from './Create'
 import ListHomestay from './ListHomestay'
+import EditHomestay from './EditHomestay'
 
 
 const Homestay = () => {
@@ -18,6 +19,7 @@ const Homestay = () => {
             <Switch>
                 <Route exact path={path} component={ListHomestay} />
                 <Route path={`${path}/create`} component={Create} />
+                <Route path={`${path}/edit/:id`} component={EditHomestay} />
             </Switch>
             </div>
       

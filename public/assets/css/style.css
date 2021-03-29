@@ -19629,6 +19629,7 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
   display: block;
   margin-left: auto;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 .addHomestay a{
   color: #ffffff;
@@ -19676,3 +19677,29 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
   .Toastify__toast--error {
     background: #e74c3c!important;
  }
+.util_line{
+  border-bottom: 1px solid #29256a;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+ }
+.dropzone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-width: 2;
+  border-radius: 2;
+  border-color: #eeeeee;
+  border-style: dashed;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  transition: border .24s ease-in-out;
+}
+.delete_util{
+  cursor: pointer;
+}
+.delete_ic{
+  cursor: pointer;
+}
