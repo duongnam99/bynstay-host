@@ -13,7 +13,7 @@ const Homestay = () => {
 
     return (
         <div className="homestay_main">
-            <button className="addHomestay"><NavLink to={`${url}/create`}>Tạo địa điểm</NavLink></button>
+            <button className="addHomestay"><NavLink to={`${url}/create/1`}><i class="cs_ic material-icons">apartment</i>Tạo địa điểm</NavLink></button>
             
             <div className="create_scr">
             <Switch>

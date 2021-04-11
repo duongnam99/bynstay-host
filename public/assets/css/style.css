@@ -19703,3 +19703,44 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
 .delete_ic{
   cursor: pointer;
 }
+.cs_ic{
+  vertical-align: bottom;
+}
+.edit_hs_list_img{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.edit_hs_list_img .wrap-img{
+  max-width: 120px;
+  padding: 10px;
+  position: relative;
+}
+.edit_hs_list_img .wrap-img img{
+  width: 100%;
+  border: 1px solid #888888;
+  padding: 2px;
+  border-radius: 4px;
+}
+.delete_button {
+  border: 1px solid #f00;
+  border-radius: 2em;
+  color: #f00;
+  position: absolute;
+  background: #fff;
+  top: 0;
+  left: 4px;
+  font-size: 12px;
+  height: 20px;
+  line-height: 2px;
+  margin: 0 0 -8px;
+  padding: 0;
+  text-align: center;
+  width: 20px;
+}
+
+.delete_button:hover{
+    background-color: #f00;
+    color: #fff;
+    cursor: pointer;
+}

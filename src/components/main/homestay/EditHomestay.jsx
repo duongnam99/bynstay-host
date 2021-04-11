@@ -106,9 +106,14 @@ const EditHomestay = () => {
         homestayService.storeImage(formData).then((response) => {
             toast.success("Lưu thành công");
             setValidateError(false);
+
+            homestayService.getHsImage(id).then((response) => {
+                setHsImage(response.data)
+            })
         })
     }
-  
+
+
     const thumbs = files.map(file => (
         <div style={thumb} key={file.name}>
         <div style={thumbInner}>
@@ -293,6 +298,23 @@ const EditHomestay = () => {
         })
     }
 
+    const deleteImage = image_id => {
+        homestayService.deleteImage(image_id).then((response) => {
+            if (response.data.status === true) {
+                toast.info("Xóa thành công");
+                setValidateError(false);
+
+                homestayService.getHsImage(id).then((response) => {
+                    setHsImage(response.data)
+                })
+            } 
+
+        }).catch(error => {
+           
+        })
+    }
+  
+
     useEffect(() => {
 
         homestayService.getHsInfo(id).then((response) => {
@@ -341,7 +363,6 @@ const EditHomestay = () => {
 
         locationService.getProvinces().then((response) => {
             setProvince(response.data)
-
         }).catch((error) => {
             console.log(error);
         });
@@ -508,7 +529,16 @@ const EditHomestay = () => {
 
 
             <h4>Cài đặt Ảnh</h4>
-            
+            <div className="edit_hs_list_img">
+            {hsImage.map((item, i) => 
+                <div className="wrap-img">
+                    <button class="delete_button" onClick={() => deleteImage(item.id)}>-</button>
+                    <img className="" src={item.url} />
+                </div>
+ 
+            )}
+            </div>
+     
             <div {...getRootProps({className: 'dropzone mt-4'})}>
                 <input {...getInputProps()} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
@@ -516,7 +546,6 @@ const EditHomestay = () => {
             <aside style={thumbsContainer}>
                 {thumbs}
             </aside>
-
 
             <button onClick={postDataImage} className="addHomestay mt-3">Lưu Ảnh</button>
         </div>

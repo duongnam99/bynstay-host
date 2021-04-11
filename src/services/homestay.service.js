@@ -23,6 +23,7 @@ export const homestayService = {
     deleteUtil,
     deletePolicy,
     updatePrice,
+    deleteImage,
 };
 
 const config = {
@@ -106,6 +107,10 @@ function deletePolicy(policy_id) {
     return Axios.delete(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay-policy/' + policy_id, config);
 }
 
+function deleteImage(image_id) {
+    return Axios.delete(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay-image/' + image_id, config);
+}
+
 function storeImage(data) {
     Axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
     return Axios.post(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay-image', data, config);
@@ -127,12 +132,12 @@ function getHsInfo(id) {
     return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay/' + id, config);
 }
 
-function getHsPrice(id) {
-    return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/get-homestay-price/' + id, config);
+function getHsPrice(homestay_id) {
+    return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/get-homestay-price/' + homestay_id, config);
 }
 
-function getHsImage(id) {
-    return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay-image/' + id, config);
+function getHsImage(homestay_id) {
+    return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/get-homestay-image/' + homestay_id, config);
 }
 
 function updateHsCommon(data) {
