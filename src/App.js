@@ -11,9 +11,11 @@ import { PrivateRoute } from './components/PrivateRoute';
 import LoginPage from './pages/Login';
 import RegistrationPage from './pages/Registration';
 import HomePage from './pages/Home';
+import EditInfo from './components/main/host/EditInfo'
 
 // css
 import 'react-toastify/dist/ReactToastify.css';
+import Director from './pages/Director';
 
 export default function App() {
     const alert = useSelector(state => state.alert);
@@ -34,7 +36,8 @@ export default function App() {
             }
             <Router history={history}>
                 <Switch>
-                    <PrivateRoute path="/" component={HomePage} />
+                    <PrivateRoute path="/home" component={HomePage} />
+                    <Route exact path="/" component={Director} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/registration" component={RegistrationPage} />
                     {/* <Redirect from="*" to="/" /> */}

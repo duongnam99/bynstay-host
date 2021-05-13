@@ -24,6 +24,10 @@ export const homestayService = {
     deletePolicy,
     updatePrice,
     deleteImage,
+    updateHostInfo,
+    getCustomer,
+    getOrder,
+    setOrderStatus
 };
 
 const config = {
@@ -65,7 +69,10 @@ function storeCommonInfo(data) {
         province_id: data.provinceId, 
         district_id: data.districtId,
         ward_id: data.wardId,
-        type_id: data.homestayTypeId 
+        type_id: data.homestayTypeId,
+        des: data.des,
+        map: data.map,
+        // user_id: data.userId
     }
 
     return Axios.post(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay', postData, config);
@@ -73,7 +80,7 @@ function storeCommonInfo(data) {
 
 function storeUtility(data) {
     let postData = {
-        homestay_id: 1,
+        homestay_id: data.homestayId,
         utility_id: data.utilChildId,
     }
 
@@ -95,7 +102,7 @@ function deleteUtil(id) {
 
 function storePolicy(data) {
     let postData = {
-        homestay_id: 1,
+        homestay_id: data.homestayId,
         policy_id: data.policyTypeId,
         content: data.content,
     }
@@ -124,6 +131,13 @@ function updatePrice(data) {
     return Axios.put(process.env.REACT_APP_BASE_API_URL + 'api/common/update-homestay-price/' + data.homestay_id, data, config);
 }
 
+function setOrderStatus(id, status) {
+    let data = {
+        order_status: status
+    }
+    return Axios.put(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay-order/' + id, data, config);
+}
+
 function getHomestay() {
     return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay', config);
 }
@@ -140,7 +154,29 @@ function getHsImage(homestay_id) {
     return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/get-homestay-image/' + homestay_id, config);
 }
 
+function getCustomer() {
+    return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/customer-by-host', config);
+}
+
+function getOrder() {
+    return Axios.get(process.env.REACT_APP_BASE_API_URL + 'api/common/order-host', config);
+}
+
 function updateHsCommon(data) {
+    let putData = {
+        name: data.name,
+        location: data.location, 
+        province_id: data.provinceId, 
+        district_id: data.districtId,
+        ward_id: data.wardId,
+        type_id: data.homestayTypeId,
+        des: data.des,
+        google_map: data.map 
+    }
+    return Axios.put(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay/' + data.id, putData, config);
+}
+
+function updateHostInfo(data) {
     let putData = {
         name: data.name,
         location: data.location, 

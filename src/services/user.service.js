@@ -5,6 +5,7 @@ export const userService = {
     login,
     logout,
     register,
+    updatePassword,
 };
 
 // Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -48,5 +49,19 @@ function register(user) {
 
             return user;
         });
+
+}
+
+function updatePassword(user) {
+    const config = {headers: {'content-type': 'application/x-www-form-urlencoded'}};
+
+    let postData = {
+        name: user.name,
+        password: user.password, 
+        email: user.email, 
+        new_password: user.new_password,
+        new_cf_password: user.new_cf_password,
+    }
+    return Axios.put(process.env.REACT_APP_BASE_API_URL + 'api/update-pw/', postData);
 
 }

@@ -17,6 +17,8 @@ const CreateHsCommonInfo = () => {
     const [districtId, setDistrictId] = useState(1)
     const [ward, setWard] = useState([])
     const [wardId, setWardId] = useState(1)
+    const [des, setDes] = useState('')
+    const [map, setMap] = useState('')
 
     const [homestayTypes, setHomestayTypes] = useState([])
     const [homestayTypeId, setHomestayTypeId] = useState(1)
@@ -39,20 +41,26 @@ const CreateHsCommonInfo = () => {
     }
 
     const postData = event => {
-
+        // let userInfo = JSON.parse(localStorage.getItem('user'));
         let data = {
+            // userId: userInfo.id,
             name: name,
             location: location,
             provinceId: provinceId,
             districtId: districtId,
             wardId: wardId,
             homestayTypeId: homestayTypeId,
+            des: des,
+            map: map,
         }
 
         homestayService.storeCommonInfo(data).then((response) => {
             toast.success("Lưu thành công");
             setValidateError(false);
-            history.push("/homestay/create/2");
+            localStorage.setItem('create-homestay', JSON.stringify(response.data));
+
+            history.push("/home/homestay/create/2");
+
         }).catch(error => {
             setValidateError(true);
             let errorData = error.response.data;
@@ -64,6 +72,8 @@ const CreateHsCommonInfo = () => {
     }
 
     const handleChangeWard = event => setWardId(event.target.value);
+    const handleChangeDes = event => setDes(event.target.value);
+    const handleChangeMap = event => setMap(event.target.value);
     const handleChangeHsType = event => setHomestayTypeId(event.target.value);
 
     useEffect(() => {
@@ -137,6 +147,24 @@ const CreateHsCommonInfo = () => {
                     <span className={"validator_error " + (isValidateError && validatorMes.type_id ? 'visible' : 'invisible')}>*{validatorMes.type_id}</span>
                 </div>
 
+            </div>
+            <div className="position-relative">
+                <div className="box">
+                    <label htmlFor="" className="d-block">Mổ tả (có thể bổ sung sau)</label>
+                    <textarea onChange={handleChangeDes} id="" className="w-100" name="" rows="4" cols="50"></textarea>
+
+                    <span className={"validator_error " + (isValidateError && validatorMes.des ? 'visible' : 'invisible')}>*{validatorMes.des}</span>
+                </div>
+            </div>
+            <div className="position-relative">
+                <div className="box">
+                    <label htmlFor="" className="d-block">Ifame Bản đồ (có thể bổ sung sau)</label>
+                    <input type="text" onChange={handleChangeMap} class="input-name-address" placeholder="Iframe bản đồ" />
+
+                    {/* <textarea onChange={handleChangeMap} id="" className="w-100" name="" rows="4" cols="50"></textarea> */}
+
+                    <span className={"validator_error " + (isValidateError && validatorMes.map ? 'visible' : 'invisible')}>*{validatorMes.map}</span>
+                </div>
             </div>
                 
             <button onClick={postData} className="addHomestay mt-3">Lưu</button>

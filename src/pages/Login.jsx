@@ -5,30 +5,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { userActions } from '../actions/user.actions';
 
 const LoginPage = () => {
-    // const [email, setEmail] = useState();
-    // const [password, setPassword] = useState();
-    // Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-    // const submit = async (e) => {
-    //     e.preventDefault();
-    
-    //     try {
-    //         const loginData = { email, password };
-        
-    //         const loginRes = await Axios.post("http://localhost:8080/users/login", stringify({
-    //             email,
-    //             password,
-    //         }));
-    //         setUserData({
-    //             token: loginRes.data.token,
-    //             user: loginRes.data.user,
-    //         });
-    //         localStorage.setItem("auth-token", loginRes.data.token);
-    //         history.push("/");
-    //     } catch (err) {
-    //         // err.response.data.msg && setError(err.response.data.msg);
-    //     }
-    // };
 
     const [inputs, setInputs] = useState({
         email: '',
@@ -55,7 +31,7 @@ const LoginPage = () => {
 
         setSubmitted(true);
         if (email && password) {
-            const { from } = location.state || { from: { pathname: "/" } };
+            const { from } = location.state || { from: { pathname: "/home" } };
             dispatch(userActions.login(email, password, from));
         }
     }

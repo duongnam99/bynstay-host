@@ -1,14 +1,11 @@
 import React, {Component, useState, useEffect } from 'react';
 import { Router, Route, Switch, Redirect, NavLink, useRouteMatch } from 'react-router-dom';
-import Axios from "axios";
-import { stringify } from "querystring";
 import {homestayService} from '../../../services/homestay.service'
 
 import EditHomestay from './EditHomestay'
 
 const ListHomestay = () => {
     let { path, url } = useRouteMatch();
-    console.log(path);
     const [homestay, setHomestay] = useState([])
     useEffect(() => {
         homestayService.getHomestay().then((response) => {

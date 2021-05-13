@@ -40,6 +40,7 @@ const img = {
   
 const CreateHsImage = () => {
     const [isValidateError, setValidateError] = useState(false)
+    const history = useHistory();
 
     const [files, setFiles] = useState([]);
     const {getRootProps, getInputProps} = useDropzone({
@@ -52,12 +53,14 @@ const CreateHsImage = () => {
     });
  
     const upload = () => {
+        let createHs = JSON.parse(localStorage.getItem('create-homestay'));
+
         let formData = new FormData();
     
         files.map(file => {
             formData.append('file[]', file)            
         })
-        formData.append('homestay_id', 1)            
+        formData.append('homestay_id', createHs.id)            
 
         homestayService.storeImage(formData).then((response) => {
             toast.success("Lưu thành công");
@@ -77,6 +80,10 @@ const CreateHsImage = () => {
     ));
 
     useEffect(() => {
+        if (!localStorage.getItem('create-homestay')) {
+            history.push("/home/homestay/create/1");
+        }
+
         files.forEach(file => URL.revokeObjectURL(file.preview));
     }, [files])
 

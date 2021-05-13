@@ -6,24 +6,39 @@ import { stringify } from "querystring";
 import CreateHsCommonInfo from '../main/homestay/CreateHsCommonInfo'
 import CreateHsUtility from '../main/homestay/CreateHsUtility'
 import Homestay from '../main/homestay/Homestay'
-
+import EditInfo from '../main/host/EditInfo'
+import { useHistory } from 'react-router-dom';
+import Client from '../main/customer/Customer';
+import Customer from '../main/customer/Customer';
+import Order from '../main/order/Order';
 
 const Main = ({ }) => {
     let { path, url } = useRouteMatch();
+    const history = useHistory();
+
+    useEffect(() => {
+        history.push({
+            pathname: `/home/homestay`,
+        })
+
+    }, []);
 
     return (
-        <>        
+        <>    
         <div className="col-3">
             <div className="sidebar">
-                <ul className="">
+                <ul className="navigation_home">
                     <li>
-                        <NavLink to={`${url}homestay`}>Homestay</NavLink>
+                        <NavLink to={`${url}/homestay`}><i class="material-icons location_city">location_city</i> Homestay</NavLink>
                     </li>
                     <li>
-                        <NavLink to={`${url}client`}>Khách hàng</NavLink>
+                        <NavLink to={`${url}/customer`}><i class="material-icons hotel">hotel</i> Khách hàng</NavLink>
                     </li>
                     <li>
-                        <NavLink to={`${url}revenue`}>Doanh thu</NavLink>
+                        <NavLink to={`${url}/order`}><i class="material-icons attach_money">attach_money</i> Đặt chỗ</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={`${url}/host`}><i class="material-icons info_outline">info_outline</i> Cá nhân</NavLink>
                     </li>
                 </ul>
             </div>
@@ -31,8 +46,10 @@ const Main = ({ }) => {
 
         <div className="col-9">
             <Switch>
-                <Route path={`${path}homestay`} component={Homestay} />
-                <Route path={`${path}revenue`} component={CreateHsUtility} />
+                <Route path={`${path}/homestay`} component={Homestay} />
+                <Route path={`${path}/order`} component={Order} />
+                <Route path={`${path}/host`} component={EditInfo} />
+                <Route path={`${path}/customer`} component={Customer} />
             </Switch>
         </div>
 

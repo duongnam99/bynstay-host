@@ -5,8 +5,6 @@ import { stringify } from "querystring";
 import { ToastContainer, toast } from 'react-toastify';
 import {homestayService} from '../../../services/homestay.service'
 
-
-
 const CreateHsPolicy = () => {
     const history = useHistory();
 
@@ -26,7 +24,9 @@ const CreateHsPolicy = () => {
         let data = {
             policyTypeId: policyTypeId,
             content: content,
+            homestayId: createHs.id
         }
+        let createHs = JSON.parse(localStorage.getItem('create-homestay'));
 
         homestayService.storePolicy(data).then((response) => {
             if (response.data.status === false) {
@@ -53,7 +53,9 @@ const CreateHsPolicy = () => {
     }
 
     useEffect(() => {
-        
+        if (!localStorage.getItem('create-homestay')) {
+            history.push("/home/homestay/create/1");
+        }
         homestayService.getPolicyType().then((response) => {
             setPolicyType(response.data)
         }).catch((error) => {

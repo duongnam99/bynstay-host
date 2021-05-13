@@ -29,8 +29,11 @@ const CreateHsUtility = () => {
     const handleChangeUtilChild = event => {setUtilChildId(event.target.value)}
 
     const postData = event => {
+        let createHs = JSON.parse(localStorage.getItem('create-homestay'));
+
         let data = {
             utilChildId: utilChildId,
+            homestayId: createHs.id
         }
 
         homestayService.storeUtility(data).then((response) => {
@@ -41,7 +44,7 @@ const CreateHsUtility = () => {
                 setValidateError(false);
             }
 
-            homestayService.getHsUtil(1).then((response) => {
+            homestayService.getHsUtil(createHs.id).then((response) => {
                 setUtil(response.data)
             })
 
@@ -57,7 +60,9 @@ const CreateHsUtility = () => {
     }
 
     useEffect(() => {
-        
+        if (!localStorage.getItem('create-homestay')) {
+            history.push("/home/homestay/create/1");
+        }
         homestayService.getUtilityParent().then((response) => {
             setUtilParent(response.data)
         }).catch((error) => {

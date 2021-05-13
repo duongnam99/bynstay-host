@@ -27,15 +27,17 @@ const CreateHsPrice = () => {
 
 
     const postData = event => {
+        let createHs = JSON.parse(localStorage.getItem('create-homestay'));
+
         let data = {
-            homestay_id: 1,
+            homestay_id: createHs.id,
             price_normal: normalPrice,
             price_special: specialPrice,
             max_guest: maxNight,
             max_night: maxPeople,
             price_expense: sideFree,
         }
-        console.log(data);
+
         homestayService.storePrice(data).then((response) => {
             if (response.data.status === false) {
                 toast.warning(response.data.message);
@@ -44,7 +46,7 @@ const CreateHsPrice = () => {
                 setValidateError(false);
             }
 
-            history.push("/homestay/create/5");
+            history.push("/home/homestay/create/5");
         }).catch(error => {
             setValidateError(true);
             let errorData = error.response.data;
@@ -56,7 +58,9 @@ const CreateHsPrice = () => {
     }
 
     useEffect(() => {
-        
+        if (!localStorage.getItem('create-homestay')) {
+            history.push("/home/homestay/create/1");
+        }
 
     }, [])
 

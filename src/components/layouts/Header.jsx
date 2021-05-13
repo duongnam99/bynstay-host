@@ -1,8 +1,12 @@
 import React, {Component, useState, useEffect } from 'react';
 import Axios from "axios";
 import { stringify } from "querystring";
+import { Router, Route, Switch, useRouteMatch, Redirect, NavLink, Link, HashRouter } from 'react-router-dom';
+import EditInfo from '../main/host/EditInfo'
+
 
 const Header = () => {
+    let { path, url } = useRouteMatch();
 
     return (
         <header>
@@ -12,9 +16,9 @@ const Header = () => {
 
                 </div>
                 <div class="logo">
-                    <a href="/">
+                    <NavLink to={`${url}/host/info`}>  
                         <img src={'/assets/images/logo-byn.png'} alt="" />
-                    </a>
+                    </NavLink>
                 </div>
                 <div class="menu_top">
                     <ul class="main-menu">
@@ -25,13 +29,13 @@ const Header = () => {
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="">
+                            <NavLink to={`${url}/host`}>
                                 <i class="material-icons">chrome_reader_mode</i>
-                                Lịch đặt của tôi 
-                            </a>
+                                Thông tin cá nhân
+                            </NavLink>
                         </li>
                     </ul>
-                    <div class="select-currency">
+                    {/* <div class="select-currency">
                         <span class="currency-show ic_vnd">VND</span>
                         <ul>
                             <li>
@@ -45,15 +49,15 @@ const Header = () => {
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
                 <div class="user_head">
-                    <div class="d-block d-md-none">
-                        <a href="javascript:;">
-
-                        </a>
+                    <div class="d-block">
+                    <NavLink className="wrap_uh" to={`${url}/host`}>
+                        <img src={'/assets/images/avatar_def.png'} alt=""/>
+                    </NavLink>
                     </div>
-                    <ul class="link_user">
+                    {/* <ul class="link_user">
                         <li class="login">
                             <a href="#">
                                 Đăng nhập
@@ -64,7 +68,7 @@ const Header = () => {
                                 Đăng ký
                             </a>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
         </div>
@@ -73,25 +77,25 @@ const Header = () => {
             <div class="container">
                 <ul class="main-menu">
                     <li class="menu-item">
-                        <a href="#">
+                        <NavLink to={`${url}/homestay`}>  
                             <i class="material-icons location_city">location_city</i>
                             Homestay
-                        </a>
+                        </NavLink>
                     </li>
                     <li class="menu-item">
-                        <a href="#">
+                        <NavLink to={`${url}/client`}>  
                             <span class="dub-ic">
                                 <i class="material-icons hotel">hotel</i>
                                 <i class="material-icons flight">flight</i>
                             </span>
                             Khách hàng
-                        </a>
+                        </NavLink>
                     </li>
                     <li class="menu-item">
-                        <a href="#">
+                        <NavLink to={`${url}/revenue`}>  
                             <i class="material-icons local_activity">local_activity</i>
                             Thống kê
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </div>

@@ -60,6 +60,8 @@ const EditHomestay = () => {
     const [districtId, setDistrictId] = useState()
     const [ward, setWard] = useState([])
     const [wardId, setWardId] = useState()
+    const [des, setDes] = useState('')
+    const [map, setMap] = useState('')
 
     const [homestayTypes, setHomestayTypes] = useState([])
     const [homestayTypeId, setHomestayTypeId] = useState(1)
@@ -101,7 +103,7 @@ const EditHomestay = () => {
         files.map(file => {
             formData.append('file[]', file)            
         })
-        formData.append('homestay_id', 1)            
+        formData.append('homestay_id', id)            
 
         homestayService.storeImage(formData).then((response) => {
             toast.success("Lưu thành công");
@@ -238,7 +240,6 @@ const EditHomestay = () => {
     }
 
     const postDataCommon = event => {
-
         let data = {
             id: id,
             name: name,
@@ -247,12 +248,12 @@ const EditHomestay = () => {
             districtId: districtId,
             wardId: wardId, 
             homestayTypeId: homestayTypeId,
+            des: des,
+            map: map,
         }
-
         homestayService.updateHsCommon(data).then((response) => {
             toast.success("Lưu thành công");
             setValidateError(false);
-            // history.push("/homestay/create/2");
         }).catch(error => {
             setValidateError(true);
             let errorData = error.response.data;
@@ -264,6 +265,14 @@ const EditHomestay = () => {
     }
 
     const handleChangeWard = event => setWardId(event.target.value);
+    const handleChangeDes = event => {
+        setDes(event.target.value);
+
+    }
+    const handleChangeMap = event => {
+        console.log(event.target.value)
+        setMap(event.target.value);
+    } 
     const handleChangeHsType = event => setHomestayTypeId(event.target.value);
     
     const deleteUtil = util_id => {
@@ -326,6 +335,8 @@ const EditHomestay = () => {
             setDistrictId(response.data.location_info.district_id)
             setWardId(response.data.location_info.ward_id)
             setHomestayTypeId(response.data.type_id)
+            setDes(response.data.des)
+            setMap(response.data.google_map)
 
             locationService.getDistrictsByProvince(response.data.location_info.province_id).then((response) => {
                 setDistrict(response.data)
@@ -375,7 +386,6 @@ const EditHomestay = () => {
 
         homestayService.getUtilityParent().then((response) => {
             setUtilParent(response.data)
-            console.log(response.data)
         }).catch((error) => {
             console.log(error);
         });
@@ -438,6 +448,21 @@ const EditHomestay = () => {
                         {homestayTypes.map((item,i) => <option key={i} value={item.id}>{item.name}</option>)}
                     </select>
                     <span className={"validator_error " + (isValidateError && validatorMes.type_id ? 'visible' : 'invisible')}>*{validatorMes.type_id}</span>
+                </div>
+            </div>
+
+            <div className="position-relative">
+                <div className="box">
+                    <label htmlFor="" className="d-block">Mổ tả </label>
+                    <textarea value={des} onChange={handleChangeDes} id="" className="w-100" name="" rows="4" cols="50"></textarea>
+                    <span className={"validator_error " + (isValidateError && validatorMes.des ? 'visible' : 'invisible')}>*{validatorMes.des}</span>
+                </div>
+            </div>
+            <div className="position-relative">
+                <div className="box">
+                    <label htmlFor="" className="d-block">Ifame Bản đồ </label>
+                    <input type="text" value={map} onChange={handleChangeMap} class="input-name-address" placeholder="Iframe bản đồ" />
+                    <span className={"validator_error " + (isValidateError && validatorMes.map ? 'visible' : 'invisible')}>*{validatorMes.map}</span>
                 </div>
             </div>
             <button onClick={postDataCommon} className="addHomestay mt-3">Lưu thông tin cơ bản</button>
