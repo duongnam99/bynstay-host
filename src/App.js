@@ -13,7 +13,6 @@ import RegistrationPage from './pages/Registration';
 import HomePage from './pages/Home';
 import EditInfo from './components/main/host/EditInfo'
 
-// css
 import 'react-toastify/dist/ReactToastify.css';
 import Director from './pages/Director';
 

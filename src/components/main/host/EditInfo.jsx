@@ -1,7 +1,5 @@
 import React, {Component, useState, useEffect } from 'react';
 import { Router, Route, Switch, Redirect, useRouteMatch, NavLink } from 'react-router-dom';
-import Axios from "axios";
-import { stringify } from "querystring";
 import {useDropzone} from 'react-dropzone'
 import { ToastContainer, toast } from 'react-toastify';
 import {homestayService} from '../../../services/homestay.service'
@@ -72,28 +70,65 @@ const EditInfo = () => {
     });
 
     const postData = event => {
-        let data = {
-            homestay_id: 1,
-            email: email,
-            password: pw,
-            new_password: newPw,
-            new_cf_password: confirmNewPw,
-        }
-        userService.updatePassword(data).then((response) => {
-            if (response.data.status === false) {
-                toast.warning(response.data.message);
-            } else {
-                toast.success("Lưu mật khẩu thành công");
-                setValidateError(false);
+        let flagPass = false
+        if (isChangingPass) {
+            let data = {
+                name: name,
+                email: email,
+                password: pw,
+                new_password: newPw,
+                new_cf_password: confirmNewPw,
             }
 
-        }).catch(error => {
-            setValidateError(true);
-            let errorData = error.response.data;
-            toast.error(errorData.message);
-            setValidatorMes(errorData.data)
-        
-        })
+            if (confirmNewPw != newPw) {
+                toast.error("Nhập lại mật khẩu không đúng");
+            }
+            userService.updatePassword(data).then((response) => {
+                if (response.data.status === false) {
+                    toast.warning("Lưu mật khẩu mới thất bại");
+                } else {
+                    toast.success("Lưu mật khẩu mới thành công");
+                    setValidateError(false);
+                    setIsChangingPass(false)
+                    flagPass = true;
+                }
+    
+            }).catch(error => {
+                setValidateError(true);
+                let errorData = error.response.data;
+                toast.error(errorData.message);
+                setValidatorMes(errorData.data)
+            
+            })
+        } else {
+            flagPass = true
+        }
+
+        if (flagPass) {
+            let infoData = {
+                name: name,
+                email: email,
+            }
+    
+            userService.updateInfo(infoData).then((response) => {
+                if (response.data.status === false) {
+                    toast.warning("Thay đổi thông tin thất bại");
+                } else {
+                    toast.success("Cập nhật thông tin thành công");
+                    setValidateError(false);
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+    
+                }
+    
+            }).catch(error => {
+                setValidateError(true);
+                let errorData = error.response.data;
+                toast.error(errorData.message);
+                setValidatorMes(errorData.data)
+            
+            })
+    
+        }
     }
 
     useEffect(() => {

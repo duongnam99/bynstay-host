@@ -52,16 +52,19 @@ function register(user) {
 
 }
 
-function updatePassword(user) {
-    const config = {headers: {'content-type': 'application/x-www-form-urlencoded'}};
+const permissionConfig = {
+    headers: authHeader()
+};
 
-    let postData = {
+function updatePassword(user) {
+
+    let putData = {
         name: user.name,
         password: user.password, 
         email: user.email, 
         new_password: user.new_password,
         new_cf_password: user.new_cf_password,
     }
-    return Axios.put(process.env.REACT_APP_BASE_API_URL + 'api/update-pw/', postData);
+    return Axios.put(process.env.REACT_APP_BASE_API_URL + 'api/update-pw/', putData, permissionConfig);
 
 }

@@ -19658,6 +19658,7 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
   color: #c31919;
   font-size: 13px;
 }
+
 .Toastify__toast-container {
   width: 320px;
 }
@@ -19677,6 +19678,7 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
   .Toastify__toast--error {
     background: #e74c3c!important;
  }
+ 
 .util_line{
   border-bottom: 1px solid #29256a;
   padding-bottom: 5px;

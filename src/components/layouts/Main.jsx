@@ -1,14 +1,9 @@
 import React, {Component, useState, useEffect } from 'react';
 import { Router, Route, Switch, useRouteMatch, Redirect, NavLink, Link, HashRouter } from 'react-router-dom';
-import Axios from "axios";
-import { stringify } from "querystring";
 
-import CreateHsCommonInfo from '../main/homestay/CreateHsCommonInfo'
-import CreateHsUtility from '../main/homestay/CreateHsUtility'
 import Homestay from '../main/homestay/Homestay'
 import EditInfo from '../main/host/EditInfo'
 import { useHistory } from 'react-router-dom';
-import Client from '../main/customer/Customer';
 import Customer from '../main/customer/Customer';
 import Order from '../main/order/Order';
 
