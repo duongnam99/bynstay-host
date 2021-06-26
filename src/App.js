@@ -39,6 +39,7 @@ export default function App() {
                     <Route exact path="/" component={Director} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/registration" component={RegistrationPage} />
+                    
                     {/* <Redirect from="*" to="/" /> */}
                 </Switch>
             </Router>
