@@ -20005,3 +20005,56 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
   border: none;
 }
 
+.ListHomestay .head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ListHomestay .head span:hover{
+  cursor: pointer;
+}
+
+.ListHomestay .head .r_approve{
+  color: #888;
+}
+
+.ListHomestay .head .r_approve:hover{
+  color: #bf2d69;
+}
+.ListHomestay .head .r_approve.active{
+  color: #bf2d69;
+}
+
+.user_head {
+  display: flex;
+  align-items: center;
+}
+.user_head div{
+  margin-right: 10px;
+}
+.user_head a{
+  display: inline-flex;
+  color: #333;
+  align-items: center;
+  font-weight: 700;
+}
+.user_head a .wrap-img{
+  width: 36px;
+  position: relative;
+  height: 36px;
+}
+.user_head a .wrap-img img{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  position: absolute;
+}
+.user_head .regiter a{
+    border-radius: 4px;
+    background-color: #bf2d69;
+    padding: 6px 15px;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+}

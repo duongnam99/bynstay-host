@@ -105,12 +105,16 @@ const EditInfo = () => {
         }
 
         if (flagPass) {
-            let infoData = {
-                name: name,
-                email: email,
-            }
+        
+            let formData = new FormData();
     
-            userService.updateInfo(infoData).then((response) => {
+            files.map(file => {
+                formData.append('file[]', file)            
+            })
+            formData.append('name', name)            
+            formData.append('email', email)            
+
+            userService.updateInfo(formData).then((response) => {
                 if (response.data.status === false) {
                     toast.warning("Thay đổi thông tin thất bại");
                 } else {

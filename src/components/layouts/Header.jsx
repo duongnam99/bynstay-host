@@ -7,7 +7,12 @@ import EditInfo from '../main/host/EditInfo'
 
 const Header = () => {
     let { path, url } = useRouteMatch();
+    let [user, setUser] = useState({});
 
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')));
+        console.log(url)
+    }, [])
     return (
         <header>
         <div class="container header-top">
@@ -23,52 +28,24 @@ const Header = () => {
                 <div class="menu_top">
                     <ul class="main-menu">
                         <li class="menu-item">
-                            <a href="">
-                                <i class="material-icons">email</i>
-                                Tin nhắn
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <NavLink to={`${url}/host`}>
+                            {/* <NavLink to={`${url}/host`}>
                                 <i class="material-icons">chrome_reader_mode</i>
                                 Thông tin cá nhân
-                            </NavLink>
+                            </NavLink> */}
+                      
                         </li>
                     </ul>
-                    {/* <div class="select-currency">
-                        <span class="currency-show ic_vnd">VND</span>
-                        <ul>
-                            <li>
-                                <a href="javascript:;" class="currency-item ic_vnd">
-                                    VND
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" class="currency-item ic_dola">
-                                    USD
-                                </a>
-                            </li>
-                        </ul>
-                    </div> */}
+                 
                 </div>
                 <div class="user_head">
-                    <div class="d-block">
-                    <NavLink className="wrap_uh" to={`${url}/host`}>
-                        <img src={'/assets/images/avatar_def.png'} alt=""/>
+                    <NavLink className="wrap_uh " to={`${url}/host`}>
+                        <span>{user.name}</span>
+
+                        <div className="wrap-img">
+                        <img src={ user.avatar != null ? process.env.REACT_APP_BASE_API_URL + 'uploads/' + user.avatar : '/assets/images/avatar_def.png'} alt=""/>
+                        </div>
+
                     </NavLink>
-                    </div>
-                    {/* <ul class="link_user">
-                        <li class="login">
-                            <a href="#">
-                                Đăng nhập
-                            </a>
-                        </li>
-                        <li class="regiter">
-                            <a href="#">
-                                Đăng ký
-                            </a>
-                        </li>
-                    </ul> */}
                 </div>
             </div>
         </div>

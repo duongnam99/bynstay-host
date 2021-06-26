@@ -1,4 +1,4 @@
-import { authHeader } from '../helpers/auth-header';
+import authHeader from '../helpers/auth-header';
 import Axios from "axios";
 
 export const userService = {
@@ -6,11 +6,12 @@ export const userService = {
     logout,
     register,
     updatePassword,
+    updateInfo
 };
 
 // Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-function login(email, password) {
+async function login(email, password) {
     const config = {headers: {'content-type': 'application/x-www-form-urlencoded'}};
     const formData = new FormData();
     formData.append('email', email);
@@ -67,4 +68,9 @@ function updatePassword(user) {
     }
     return Axios.put(process.env.REACT_APP_BASE_API_URL + 'api/update-pw/', putData, permissionConfig);
 
+}
+
+function updateInfo(formData) {
+
+    return Axios.post(process.env.REACT_APP_BASE_API_URL + 'api/user/edit', formData, permissionConfig);
 }

@@ -27,7 +27,8 @@ export const homestayService = {
     updateHostInfo,
     getCustomer,
     getOrder,
-    setOrderStatus
+    setOrderStatus,
+    requestAprrove
 };
 
 const config = {
@@ -85,6 +86,14 @@ function storeUtility(data) {
     }
 
     return Axios.post(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay-utility', postData, config);
+}
+
+function requestAprrove(hsId) {
+    let postData = {
+        homestay_id: hsId,
+    }
+
+    return Axios.post(process.env.REACT_APP_BASE_API_URL + 'api/common/homestay-approve-request', postData, config);
 }
 
 function updateUtility(data) {
