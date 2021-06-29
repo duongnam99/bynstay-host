@@ -19752,11 +19752,13 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
 }
 
 .user_head .wrap_uh{
-    width: 40px;
-    height: 40px;
     border-radius: 50%;
-    display: inline-block;
+    display: flex;
 }
+.user_head .wrap-img{
+  margin-left: 10px;
+}
+
 .navigation_home i {
   font-size: 18px;
 }

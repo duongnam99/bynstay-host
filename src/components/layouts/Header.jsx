@@ -60,7 +60,7 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li class="menu-item">
-                        <NavLink to={`${url}/client`}>  
+                        <NavLink to={`${url}/customer`}>  
                             <span class="dub-ic">
                                 <i class="material-icons hotel">hotel</i>
                                 <i class="material-icons flight">flight</i>
@@ -69,9 +69,9 @@ const Header = () => {
                         </NavLink>
                     </li>
                     <li class="menu-item">
-                        <NavLink to={`${url}/revenue`}>  
+                        <NavLink to={`${url}/order`}>  
                             <i class="material-icons local_activity">local_activity</i>
-                            Thống kê
+                            Đặt chỗ
                         </NavLink>
                     </li>
                 </ul>
