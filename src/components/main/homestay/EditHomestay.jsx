@@ -1,7 +1,5 @@
 import React, {Component, useState, useEffect } from 'react';
 import { Router, Route, Switch, Redirect, NavLink, useRouteMatch, useParams, useHistory } from 'react-router-dom';
-import Axios from "axios";
-import { stringify } from "querystring";
 import {locationService} from '../../../services/location.service'
 import {homestayService} from '../../../services/homestay.service'
 import { ToastContainer, toast } from 'react-toastify';
@@ -181,6 +179,7 @@ const EditHomestay = () => {
         let data = {
             policyTypeId: policyTypeId,
             content: content,
+            homestayId: id
         }
 
         homestayService.storePolicy(data).then((response) => {
@@ -234,9 +233,15 @@ const EditHomestay = () => {
     }
     const handleChangeProvince = event => {
         setProvinceId(event.target.value);
+        locationService.getDistrictsByProvince(event.target.value).then((response) => {
+            setDistrict(response.data)
+        })
     }
     const handleChangeDistrict = event => {
         setDistrictId(event.target.value);
+        locationService.getWardByDistrict(event.target.value).then((response) => {
+            setWard(response.data)
+        })
     }
 
     const postDataCommon = event => {
@@ -267,8 +272,8 @@ const EditHomestay = () => {
     const handleChangeWard = event => setWardId(event.target.value);
     const handleChangeDes = event => {
         setDes(event.target.value);
-
     }
+
     const handleChangeMap = event => {
         console.log(event.target.value)
         setMap(event.target.value);
@@ -392,6 +397,9 @@ const EditHomestay = () => {
 
         homestayService.getPolicyType().then((response) => {
             setPolicyType(response.data)
+            if (response.data.length > 0) {
+                setPolicyTypeId(response.data[0]['id'])
+            }
         }).catch((error) => {
             console.log(error);
         });
