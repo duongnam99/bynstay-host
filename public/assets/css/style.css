@@ -19780,6 +19780,11 @@ header .primery-menu .main-menu .menu-item a .dub-ic .flight {
   background-color: #403c77;
   margin-right: auto;
   margin-left: unset;
+  display: inline-block;
+  margin-right: 20px;
+}
+.addHomestay.change_pass.logout{
+  background-color: #bf2d69;
 }
 .addHomestay.change_pass:hover{
   background-color: #29256a;

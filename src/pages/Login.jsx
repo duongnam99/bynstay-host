@@ -1,7 +1,7 @@
 import React, {Component, useState, useEffect } from 'react';
 import Axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, NavLink, useRouteMatch } from 'react-router-dom';
 import { userActions } from '../actions/user.actions';
 
 const LoginPage = () => {
@@ -10,6 +10,8 @@ const LoginPage = () => {
         email: '',
         password: ''
     });
+    let { path, url } = useRouteMatch();
+
     const [submitted, setSubmitted] = useState(false);
     const { email, password } = inputs;
     const loggingIn = useSelector(state => state.authentication.loggingIn);
@@ -45,7 +47,9 @@ const LoginPage = () => {
                     <div class="signin-content">
                         <div class="signin-image">
                             <figure><img src="./assets/images/signin-image.jpg" alt="sing up image" /></figure>
-                            <a href="#" class="signup-image-link">Create an account</a>
+                            <NavLink to={`/registration`}>  
+                                Tạo tài khoản
+                            </NavLink>
                         </div>
 
                         <div class="signin-form">

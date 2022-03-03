@@ -1,9 +1,11 @@
 import React, {Component, useState, useEffect } from 'react';
 import { Router, Route, Switch, Redirect, useRouteMatch, NavLink } from 'react-router-dom';
 import {useDropzone} from 'react-dropzone'
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
-import {homestayService} from '../../../services/homestay.service'
+import { userActions } from '../../../actions/user.actions';
 import {userService} from '../../../services/user.service'
+import { history } from '../../../helpers/history';
 
 
 const thumbsContainer = {
@@ -52,9 +54,18 @@ const EditInfo = () => {
 
     const [isValidateError, setValidateError] = useState(false)
     const [validatorMes, setValidatorMes] = useState([])
+    const dispatch = useDispatch();
 
     const showChangePw = () => {
         setIsChangingPass(true)
+    }
+
+    const logout = () => {
+        dispatch(userActions.logout()); 
+        history.push('/login');
+
+        // return <Redirect to={{ pathname: '/login'}} />
+
     }
     const {getRootProps, getInputProps} = useDropzone({
         accept: 'image/*',
@@ -169,6 +180,7 @@ const EditInfo = () => {
              
             </div>
             <button onClick={showChangePw} className="addHomestay change_pass mt-3">Đổi mật khẩu</button>
+            <button onClick={logout} className="addHomestay change_pass logout mt-3">Đăng xuất</button>
             <div className={"position-relative " + (isChangingPass ? "d-flex" : "d-none") }>
                 <div className="box">
                     <input type="password" value={pw} onChange={event => setPw(event.target.value)} className="input-name-address" placeholder="Mật khẩu hiện tại" />
